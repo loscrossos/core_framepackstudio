@@ -1,0 +1,1 @@
+while true ; do clear ;echo press Ctrl + c to stop this display; date; echo swap usage:  ; sysctl vm.swapusage; echo Free Disk Space: ; df -H  / | awk 'NR==2 {print $4}'; echo IF your Free Diskspace approaches 30GB then abort Framepack or you risk a system crash. ;echo outputs: ;ls -la ../outputs  ; sleep 2 ; done
