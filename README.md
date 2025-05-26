@@ -35,6 +35,10 @@ This project does not aim at more functionality. *It hardens the core*.
 
 *Project currently does NOT support AMD GPUs (ROCm) or pure CPU setups*
 
+Installation Tutorial step-by-step (same information as here):
+
+https://www.youtube.com/watch?v=k2e-YjweC-g
+
 
 ### Contents 
 
