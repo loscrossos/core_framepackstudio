@@ -73,7 +73,7 @@ Remember: all the risks and requirements i list here are **not mine**. They come
 
 ## TLDR Installation
 
-These are the summarized commands to install and run core_framepackStudio
+These are the summarized commands to install and run core_framepackStudio. Detailed steps follow below.
 
 **Mac**
 ```
@@ -91,8 +91,10 @@ pip install -r requirements.txt
 ```
 git clone https://github.com/loscrossos/core_framepackstudio
 cd core_framepackstudio
+
 py -3.12 -m venv .env_win
 .env_win\Scripts\activate
+
 pip install -r requirements.txt
 ```
 
@@ -103,30 +105,31 @@ pip install -r requirements.txt
 ```
 git clone https://github.com/loscrossos/core_framepackstudio
 cd core_framepackstudio
+
 python3.12 -m venv .env_lin
 . ./.env_lin/bin/activate
+
 pip install -r requirements.txt
 ```
 
 **All OSes**
-
-- **Option 1**: automatic model download: Skip the options and just start the app
+You can use one of these optional steps (detailed steps below):
+- **Option 1**: automatic model download: just go to the next step and start the app!
 
 - **Option 2**: Manual triggered Model Donwload: enter the `models` dir and use the `maclin_get_models.sh` or `win_get_models.bat`
 
-- **Option 3a**: reuse your models: Place your model directories or `gh_download` folder in the `models`folder. Check that it worked with:
-`python appframepack.py --checkmodels`
-- **Option 3b**: reuse your models without changing their paths: run python appframepack.py --checkmodels` to generate `configmodels.txt` and edit the paths within the file. run the command again to verify it worked.
+- **Option 3a**: reuse your models: Place your model directories or `hf_download` folder in the `models`folder. Check that it worked with: `python appframepack.py --checkmodels`
+- **Option 3b**: reuse your models without changing their paths: run  `python appframepack.py --checkmodels` after install to generate `configmodels.txt` and edit the paths within the file. run the command again to verify it worked.
 
 **Run the app**
 
-start the app with any of these:
+start the apps with any of these:
 
-`python appframepack.py --inbrowser`
-`python appf1framepack.py --inbrowser`
-`python appstudio.py --inbrowser`
+- Original Framepack:   `python appframepack.py --inbrowser`
+- Framepack F1:         `python appf1framepack.py --inbrowser`
+- Framepack Studio:     `python appstudio.py --inbrowser`
 
-Stop the app pressing `ctrl+c` on the terminal
+Stop the app pressing `ctrl + c` on the terminal
 
 
 

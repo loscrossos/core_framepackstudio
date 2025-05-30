@@ -19,13 +19,16 @@ if TEST_MODE:
     #studio allows lower resolutions
     init_if_resolution=128
 
-##START#######################
 
+
+
+##START#######################
+DEFAULT_MODEL_CONFIG_FILE = "configmodel.txt"
 import sys
 import os
 from dotenv import load_dotenv
 # Load paths from the current directory
-load_dotenv("config_modelpaths.txt")
+load_dotenv(DEFAULT_MODEL_CONFIG_FILE)
 # Define variable names and their fallback values
 settings_path_outputs= os.path.abspath(os.path.realpath(os.path.join(os.path.dirname(__file__), '../outputs')))
 
