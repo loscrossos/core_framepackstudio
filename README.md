@@ -1,5 +1,5 @@
 
-# framepackStudio_core
+# core_framepackStudio
 
 This project does not aim at more functionality. *It hardens the core*.
 
@@ -35,9 +35,7 @@ This project does not aim at more functionality. *It hardens the core*.
 
 *Project currently does NOT support AMD GPUs (ROCm) or pure CPU setups*
 
-Installation Tutorial step-by-step (same information as here):
-
-https://www.youtube.com/watch?v=k2e-YjweC-g
+Installation Tutorial step-by-step (same information as here): coming up
 
 
 ### Contents 
@@ -64,7 +62,7 @@ This project is the documentation that i didn't manage to find on the internet. 
 
 The installation in general consists of:
 - Pre-Requisites: Check that your system can actually run the model
-- Project Installation: setup the framepackStudio_core code
+- Project Installation: setup the core_framepackstudio code
 - Let the software download the models or optionally: 
     - setup to re-use your already downloaded models 
     - setup the models for multi-boot setups
@@ -72,6 +70,66 @@ The installation in general consists of:
 In order to install we will use the console. There is plenty of caveats you should know before doing using AI models in general.We need to have control over what is happening. Framepack moves along the edge of technology and, as we will later see, can perform poorly or even crash your system (see on MacOS only) if not setup properly. To be as efficient as possible, we will use standard python mechanisms. The procedures we use, will be also useful for other AI projects across MacOS, Windows and Linux you will encounter in the future. 
 
 Remember: all the risks and requirements i list here are **not mine**. They come from the original Framepack/Studio and, in general, are present in all AI projects nowadays. In this project, i am just documenting my findings based on testing and code analysis.
+
+## TLDR Installation
+
+These are the summarized commands to install and run core_framepackStudio
+
+**Mac**
+```
+git clone https://github.com/loscrossos/core_framepackstudio
+cd core_framepackstudio
+
+python3.12 -m venv .env_mac
+. ./.env_mac/bin/activate
+
+pip install -r requirements.txt
+```
+
+
+***Windows***
+```
+git clone https://github.com/loscrossos/core_framepackstudio
+cd core_framepackstudio
+py -3.12 -m venv .env_win
+.env_win\Scripts\activate
+pip install -r requirements.txt
+```
+
+
+
+
+**Linux**
+```
+git clone https://github.com/loscrossos/core_framepackstudio
+cd core_framepackstudio
+python3.12 -m venv .env_lin
+. ./.env_lin/bin/activate
+pip install -r requirements.txt
+```
+
+**All OSes**
+
+- **Option 1**: automatic model download: Skip the options and just start the app
+
+- **Option 2**: Manual triggered Model Donwload: enter the `models` dir and use the `maclin_get_models.sh` or `win_get_models.bat`
+
+- **Option 3a**: reuse your models: Place your model directories or `gh_download` folder in the `models`folder. Check that it worked with:
+`python appframepack.py --checkmodels`
+- **Option 3b**: reuse your models without changing their paths: run python appframepack.py --checkmodels` to generate `configmodels.txt` and edit the paths within the file. run the command again to verify it worked.
+
+**Run the app**
+
+start the app with any of these:
+
+`python appframepack.py --inbrowser`
+`python appf1framepack.py --inbrowser`
+`python appstudio.py --inbrowser`
+
+Stop the app pressing `ctrl+c` on the terminal
+
+
+
 
 ## Pre-Requisites
 
@@ -159,14 +217,14 @@ Hint: "CrossOS" means the commands are valid on MacWinLin
 
  ---
 
-Lets install framepackStudio_core in 5 Lines on all OSes, shall we? Just open a terminal and enter the commands.
+Lets install core_framepackstudio in 5 Lines on all OSes, shall we? Just open a terminal and enter the commands.
 
 
 
 1. Clone the repo (CrossOS): 
 ```
-git clone https://github.com/loscrossos/framepackStudio_core
-cd framepackStudio_core
+git clone https://github.com/loscrossos/core_framepackstudio
+cd core_framepackstudio
 ```
 
 2. Create and activate a python virtual environment  
@@ -236,7 +294,7 @@ There are 2 types of model downloads: the hugginface (hf) cache and manual model
 
 If you used Framepack/Framepack-Studio you should have a folder called `hf_download` in your app folder. You can do one of these:
 
-- move that folder to the `framepackStudio_core/models` folder and it will be used automatically OR
+- move that folder to the `core_framepackstudio/models` folder and it will be used automatically OR
 - replace the set path with the one of the existing folder in the line with `HF_HOME`. Make sure that the line points only to the single 'hf_download' folder. The app will crawl the sub-directories on its own. You dont need to change any other lines as these will be ignored.
 
 If you only used Framepack or Framepack_F1 then the other model will be missing and downloaded when needed. If you used Framepack-Studio then you should have both models already.
@@ -255,15 +313,15 @@ You can easily check that the app sees the models by starting any of the demos w
 e.g. `python appstudio.py --checkmodels`
 
 ```
-[MISSING]: /Users/Shared/github/framepackstudio_core/models/hf_download/hub/models--hunyuanvideo-community--HunyuanVideo/
-[MISSING]: /Users/Shared/github/framepackstudio_core/models/hf_download/hub/models--lllyasviel--flux_redux_bfl/
-[MISSING]: /Users/Shared/github/framepackstudio_core/models/hf_download/hub/models--lllyasviel--FramePack_F1_I2V_HY_20250503/
-[MISSING]: /Users/Shared/github/framepackstudio_core/models/hf_download/hub/models--lllyasviel--FramePackI2V_HY/
+[MISSING]: /Users/Shared/github/core_framepackstudio/models/hf_download/hub/models--hunyuanvideo-community--HunyuanVideo/
+[MISSING]: /Users/Shared/github/core_framepackstudio/models/hf_download/hub/models--lllyasviel--flux_redux_bfl/
+[MISSING]: /Users/Shared/github/core_framepackstudio/models/hf_download/hub/models--lllyasviel--FramePack_F1_I2V_HY_20250503/
+[MISSING]: /Users/Shared/github/core_framepackstudio/models/hf_download/hub/models--lllyasviel--FramePackI2V_HY/
 Searching Group2: Manual:
-[!FOUND!]: /Users/Shared/github/framepackstudio_core/models/HunyuanVideo/
-[!FOUND!]: /Users/Shared/github/framepackstudio_core/models/flux_redux_bfl/
-[!FOUND!]: /Users/Shared/github/framepackstudio_core/models/FramePack_F1_I2V_HY_20250503/
-[!FOUND!]: /Users/Shared/github/framepackstudio_core/models/FramePackI2V_HY/
+[!FOUND!]: /Users/Shared/github/core_framepackstudio/models/HunyuanVideo/
+[!FOUND!]: /Users/Shared/github/core_framepackstudio/models/flux_redux_bfl/
+[!FOUND!]: /Users/Shared/github/core_framepackstudio/models/FramePack_F1_I2V_HY_20250503/
+[!FOUND!]: /Users/Shared/github/core_framepackstudio/models/FramePackI2V_HY/
 ----------------------------
 FINAL FOUNDING: It seems all model directories were found. Nothing will be downloaded!
 ```
