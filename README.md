@@ -444,15 +444,14 @@ Framepack uses 4 Attention-Accelerators. This is the current official state libr
 Lib          |MacOS         | Windows                                               | Linux                                                     |
  ---         | ---          | ---                                                   | ---                                                       |   
 Torch  attn  | works        | works                                                 | works                                                     |        
-xformers     | not available| Pypi* install works. Does NOT support RTX50(Blackwell)| Pypi Version works. Does NOT support RTX50xx(Blackwell)  |
+xformers     | not available| Pypi* is old. Blackwell needs Pytorch install         | Pypi* is old. Blackwell needs Pytorch-source install      |
 flash_attn   | complicated  | does not work from Pypi. must be compiled separately  | does not work properly from a requirements.txt. must be compiled separately |
 sageattention| complicated  | does not work from Pypi. must be compiled separately  | Old version in Pypi for Blackwell. must be compiled separately  |
 
 * Pypi is "is the official third-party software repository for Python"
 
 As you can see they all kind-of do not work or are complicated to setup in away that works with GPUs. Specially the current 50 series of Nvidia. The accelerators are made for CUDA and therefore not available for Mac Silicon. There are projects trying to accomplish this but none in a stable state to my knowledge.
-I compiled them all on my own ensuring full support of the newest CUDA version. For xFormers, i also made a fix to support Blackwell cards, that i submitted and hope will be accepted:
-https://github.com/facebookresearch/xformers/pull/1254
+I compiled them all on my own ensuring full support of the newest CUDA version.  
 
 In the meantime i uploaded my compiled libraries to github so you can just use them directly without having to mess with source code. :D
 
