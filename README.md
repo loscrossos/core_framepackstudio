@@ -123,13 +123,24 @@ You can use one of these optional steps (detailed steps below):
 
 **Run the app**
 
-start the apps with any of these:
+Whenever you want to start the apps open a console in the repository directory, activate your virtual environment:
+
+```
+MacOS:
+. ./.env_mac/bin/activate
+Windows:
+.env_win\Scripts\activate
+Linux:
+. ./.env_lin/bin/activate
+```
+
+and start any of these:
 
 - Original Framepack:   `python appframepack.py --inbrowser`
 - Framepack F1:         `python appf1framepack.py --inbrowser`
 - Framepack Studio:     `python appstudio.py --inbrowser`
 
-Stop the app pressing `ctrl + c` on the terminal
+Stop the app pressing `ctrl + c` on the console
 
 
 
