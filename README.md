@@ -168,8 +168,8 @@ Hardware    | **Mac**                                   | **Win/Lin**
 CPU         | Mac Silicon (M1,M2....)                   | Will not be used much. So any modern CPU should do
 VRAM        | Tested on 16GB. Less will not likely work | Original author says you need 6GB VRAM
 RAM         | see VRAM                                  | The more the merrier.
-Disk Space  | 90 GB for the models     
-
+Disk Space  | 90 GB for the models                      | 90 GB for the models 
+Free Storage| 70GB of GPU+RAM+Disk Storage              | 70GB of GPU+RAM+Disk Storage
 
 
 
