@@ -61,11 +61,15 @@ This project is the documentation that i didn't manage to find on the internet. 
 # Installation
 
 The installation in general consists of:
+
 - Pre-Requisites: Check that your system can actually run the model
-- Project Installation: setup the core_framepackstudio code
-- Let the software download the models or optionally: 
-    - setup to re-use your already downloaded models 
-    - setup the models for multi-boot setups
+- Project Installation. It consists of 
+    - cloning the repository
+    - creating a virtual environment
+    - installing the requirements
+    - optionally: re-using our models
+    - starting the app.
+
 
 In order to install we will use the console. There is plenty of caveats you should know before doing using AI models in general.We need to have control over what is happening. Framepack moves along the edge of technology and, as we will later see, can perform poorly or even crash your system (see on MacOS only) if not setup properly. To be as efficient as possible, we will use standard python mechanisms. The procedures we use, will be also useful for other AI projects across MacOS, Windows and Linux you will encounter in the future. 
 
