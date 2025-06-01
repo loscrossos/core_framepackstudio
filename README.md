@@ -337,7 +337,7 @@ Searching Group2: Manual:
 [!FOUND!]: /Users/Shared/github/core_framepackstudio/models/FramePack_F1_I2V_HY_20250503/
 [!FOUND!]: /Users/Shared/github/core_framepackstudio/models/FramePackI2V_HY/
 ----------------------------
-FINAL FOUNDING: It seems all model directories were found. Nothing will be downloaded!
+FINAL RESULT: It seems all model directories were found. Nothing will be downloaded!
 ```
 
 # Usage 
