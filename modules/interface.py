@@ -9,6 +9,7 @@ init_if_latentwindowsize=9
 if sys.platform == "darwin":
     init_if_fps=24
     init_if_uram=10.3
+    init_if_resolution=416
 
 
 if TEST_MODE:

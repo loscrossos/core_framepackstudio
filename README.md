@@ -604,7 +604,6 @@ You will need it. Here are some tips how to free disk space if you are desperate
 
 CrossOS:
 - Clear your pip cache: you can run `pip cache purge` on the terminal. If you have installed lots of projects this will free several GB. Downside: you wont have a cache and next time you install torch it will be redownloaded. Still this should be done from time to time.
--
 
 Windows:
 - Disable Hibernation: Hibernation is not so useful anyways.. is it?
@@ -612,6 +611,9 @@ Windows:
 
 Linux:
 - Disable hibernation. See windows.
+- Free space by safely removing unneeded packages:
+    - `sudo apt autoclean`
+    - `sudo apt autoremove`
 
 MacOS:
 - Restart once in safe mode: A well guarded secret. When you restart in safe mode MacOS will clean up your disk! freed like 15GB on my disk out of the blue.
@@ -619,9 +621,12 @@ MacOS:
 
 ### Random Issues
 
+- **"Output is noise in random colors"**: try a lower resolution. Depending on your hardware some higher resolutions might not work at all for you.
 - **"RuntimeError: CUDA error: no kernel image is available for execution on the device":** You didnt use my libraries.. and your libraries were not compiled with the CUDA Toolkit that supports your card. If you have a 50 Series card you need libraries compiled with at least CUDA Toolkit 12.8 
-- **System crash**: only happened to me when setting the memory preservation low. see the guide.
-- **Sometimes the video preview does not appear**: this happens when your system is too busy with calculations. Then the UI will choke, as the generation process will have priority. give it more time. This can happen on Framepack-Studio on Mac more often as this was the hack i needed for it to work at all. 
+- **System crash**: only happened to me when setting the memory preservation low. Specially MacOS. see the guide.
+- **Sometimes the video preview does not appear**: this happens when your system is too busy with calculations. Then the UI will choke, as the generation process will have priority. give it more time. This can happen on Framepack-Studio on Mac more often as this was the hack i needed for it to work at all.
+    - Set the memory preservation a bit higher. If you have to set memory preservation bigger than your phsical VRAM, then this likely means it will nor work at all.
+    - Happens on MacOS sometimes when there is only one segment created. the video should be in the output folder. Try looking there.
 
 
 

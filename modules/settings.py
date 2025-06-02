@@ -1,3 +1,25 @@
+TEST_MODE=False
+import sys
+init_if_video_length=5
+init_if_steps=25
+init_if_resolution=640
+init_if_uram=6
+init_if_fps=30
+init_if_latentwindowsize=9
+if sys.platform == "darwin":
+    init_if_fps=24
+    init_if_uram=10.3
+
+
+if TEST_MODE:
+    init_if_fps=8
+    init_if_uram=9
+    init_if_video_length=10
+    init_if_steps=1
+    #studio allows lower resolutions
+    init_if_resolution=128
+
+
 import json
 from pathlib import Path
 from typing import Dict, Any, Optional
@@ -14,7 +36,7 @@ class Settings:
         # Set default paths relative to project root
         self.default_settings = {
             "save_metadata": True,
-            "gpu_memory_preservation": 6,
+            "gpu_memory_preservation": init_if_uram,
             "output_dir": str(project_root / "outputs"),
             "metadata_dir": str(project_root / "outputs"),
             "lora_dir": str(project_root / "loras"),
