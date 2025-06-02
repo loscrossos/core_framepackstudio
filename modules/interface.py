@@ -431,7 +431,7 @@ def create_interface(
                                     label=fps_label, minimum=4, maximum=60, value=init_if_fps, step=2, 
                                     info=fps_info
                                     )
-                                resolution_text = gr.Markdown(value="<div style='text-align:right; padding:5px 15px 5px 5px;'>Selected bucket for resolution: 640 x 640</div>", label="", show_label=False)
+                                resolution_text = gr.Markdown(value=f"<div style='text-align:right; padding:5px 15px 5px 5px;'>Selected bucket for resolution: {init_if_resolution} x {init_if_resolution}</div>", label="", show_label=False)
                             def on_input_image_change(img):
                                 if img is not None:
                                     return gr.update(info="Nearest valid bucket size will be used. Height will be adjusted automatically."), gr.update(visible=False)
