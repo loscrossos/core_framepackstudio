@@ -66,3 +66,4 @@ safetensors
 python-dotenv
 jinja2>=3.1.2
 peft
+psutil
