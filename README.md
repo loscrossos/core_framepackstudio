@@ -146,8 +146,17 @@ and start any of these:
 
 Stop the app pressing `ctrl + c` on the console
 
+## Step-by-Step video guide
+
+you can watch step-by-step guides for your OS
+OS	    | Step-by-step install tutorial
+---	    | ---
+Mac	    | https://youtu.be/wsv0segH_Tw
+Windows	| https://youtu.be/jDIlX9XIccc
+Linux  	| https://youtu.be/-6o1jkam6wM
 
 
+## Step-by-Step guide
 
 ## Pre-Requisites
 
