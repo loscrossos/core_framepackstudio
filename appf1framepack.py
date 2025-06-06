@@ -44,7 +44,7 @@ in_files_to_check_in_paths=[
 ]
 
 
-#LCX1.04##################################################################
+#LCX1.05##################################################################
 #FILELOADER##############################################################
 #########################################################################
 debug_mode=False
@@ -479,19 +479,42 @@ import shutil
 import torch
 import psutil
 from datetime import datetime
+
+def anonymize_path(path):
+    """Replace username in paths with <USER>"""
+    if not path:
+        return path
+    # Handle both Unix and Windows paths
+    if path.startswith('/home/'):
+        parts = path.split('/')
+        if len(parts) > 2:
+            parts[2] = '<USER>'
+            return '/'.join(parts)
+    elif path.startswith('/Users/'):
+        parts = path.split('/')
+        if len(parts) > 2:
+            parts[2] = '<USER>'
+            return '/'.join(parts)
+    elif path.startswith('C:\\Users\\'):
+        parts = path.split('\\')
+        if len(parts) > 2:
+            parts[2] = '<USER>'
+            return '\\'.join(parts)
+    return path
+
 def generate_troubleshooting_report(in_model_config_file=None):
     """Generate a comprehensive troubleshooting report for AI/LLM deployment issues."""
     # Create a divider for better readability
     divider = "=" * 80
+    
     # Initialize report
     report = []
     report.append(f"{divider}")
     report.append(f"TROUBLESHOOTING REPORT - Generated on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    #report.append(f"{divider}\n")
+    
     # 1. Hardware Information
-    #report.append(f"{divider}")
     report.append("HARDWARE INFORMATION")
-    #report.append(f"{divider}")
+    
     # CPU Info
     report.append("\nCPU:")
     report.append(f"  Model: {platform.processor()}")
@@ -507,7 +530,7 @@ def generate_troubleshooting_report(in_model_config_file=None):
     report.append("\nRAM:")
     report.append(f"  Total: {ram.total / (1024**3):.2f} GB: free: {ram.available / (1024**3):.2f} used: {ram.used / (1024**3):.2f} GB")
      
-    # GPU Info (try with nvidia-smi first, then fallback to torch if available)
+    # GPU Info
     report.append("\nGPU:")
     try:
         nvidia_smi = shutil.which('nvidia-smi')
@@ -518,7 +541,6 @@ def generate_troubleshooting_report(in_model_config_file=None):
                 report.append(f"  Model: {gpu_name.strip()}")
                 report.append(f"  VRAM: {vram_total.strip()}")
                 
-                # Get current VRAM usage if possible
                 try:
                     gpu_usage = subprocess.check_output([nvidia_smi, "--query-gpu=memory.used", "--format=csv,noheader"], encoding='utf-8').strip()
                     report.append(f"  VRAM Used: {gpu_usage.strip()}")
@@ -549,7 +571,6 @@ def generate_troubleshooting_report(in_model_config_file=None):
     # 2. Software Information
     report.append(f"\n{divider}")
     report.append("SOFTWARE INFORMATION")
-    #report.append(f"{divider}")
     
     # OS Info
     report.append("\nOPERATING SYSTEM:")
@@ -562,7 +583,7 @@ def generate_troubleshooting_report(in_model_config_file=None):
     report.append("\nPYTHON:")
     report.append(f"  Version: {platform.python_version()}")
     report.append(f"  Implementation: {platform.python_implementation()}")
-    report.append(f"  Executable: {sys.executable}")
+    report.append(f"  Executable: {anonymize_path(sys.executable)}")
     
     # Installed packages
     report.append("\nINSTALLED PACKAGES (pip freeze):")
@@ -575,12 +596,10 @@ def generate_troubleshooting_report(in_model_config_file=None):
     # CUDA Info
     report.append("CUDA INFORMATION:")
     try:
-        # Check nvcc version
         nvcc_path = shutil.which('nvcc')
         if nvcc_path:
             nvcc_version = subprocess.check_output(['nvcc', '--version'], encoding='utf-8')
             report.append(nvcc_version.strip())
-#            report.append(nvcc_version.split('\n')[0])
         else:
             report.append("NVCC not found in PATH")
     except Exception as e:
@@ -603,21 +622,18 @@ def generate_troubleshooting_report(in_model_config_file=None):
     if in_model_config_file:
         report.append(f"\n{divider}")
         report.append("MODEL CONFIGURATION")
-        #report.append(f"{divider}")
         
         try:
-            # Read config file content
             with open(in_model_config_file, 'r') as f:
                 config_content = f.read()
-            report.append(f"Content of {in_model_config_file}:")
+            report.append(f"Content of {anonymize_path(in_model_config_file)}:")
             report.append(config_content)
         except Exception as e:
-            report.append(f"\nCould not read model config file {in_model_config_file}: {str(e)}")
+            report.append(f"\nCould not read model config file {anonymize_path(in_model_config_file)}: {str(e)}")
     
     # 4. Environment Variables
     report.append(f"\n{divider}")
     report.append("RELEVANT ENVIRONMENT VARIABLES")
-    #report.append(f"{divider}")
     
     relevant_env_vars = [
         'PATH', 'LD_LIBRARY_PATH', 'CUDA_HOME', 'CUDA_PATH',
@@ -626,12 +642,17 @@ def generate_troubleshooting_report(in_model_config_file=None):
     
     for var in relevant_env_vars:
         if var in os.environ:
-            report.append(f"{var}: {os.environ[var]}")
+            # Anonymize paths in environment variables
+            if var in ['PATH', 'LD_LIBRARY_PATH', 'PYTHONPATH']:
+                paths = os.environ[var].split(os.pathsep)
+                anonymized_paths = [anonymize_path(p) for p in paths]
+                report.append(f"{var}: {os.pathsep.join(anonymized_paths)}")
+            else:
+                report.append(f"{var}: {anonymize_path(os.environ[var])}")
     
     # 5. Additional System Info
     report.append(f"\n{divider}")
     report.append("ADDITIONAL SYSTEM INFORMATION")
-    #report.append(f"{divider}")
     
     try:
         # Check if running in container
@@ -655,14 +676,13 @@ def generate_troubleshooting_report(in_model_config_file=None):
         report.append(f"  Could not check container/virtualization info: {str(e)}")
     
     # Final divider
-    #report.append(f"\n{divider}")
     report.append("END OF REPORT")
     report.append(f"{divider}")
     
     # Join all report lines
     full_report = '\n'.join(report)
     return full_report
-#END SYSREPORT###################################################################
+####END SYS REPORT########################################################################
 # Update the config file
 update_model_paths_file(in_dotenv_needed_models, in_dotenv_needed_paths, in_dotenv_needed_params, in_model_config_file)
 
@@ -679,7 +699,7 @@ if "HF_HOME" in in_dotenv_needed_paths:
     os.environ['HF_HOME'] = out_dotenv_loaded_paths["HF_HOME"]
 os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
 #os.environ["TOKENIZERS_PARALLELISM"] = "true"
-
+#CORE BLOCK END###############################################################################
 
 #originalblock#################################
 import argparse

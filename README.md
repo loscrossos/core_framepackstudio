@@ -344,6 +344,37 @@ Searching Group2: Manual:
 FINAL RESULT: It seems all model directories were found. Nothing will be downloaded!
 ```
 
+
+## Update
+
+If you ever need to update the app
+- because you know that the repository changed
+- you filed a bug and it got fixed
+
+**update repository**
+
+you can safely do so by starting a terminal in the repository directory and typing:
+```
+git pull
+```
+if you didnt change any original files this will safely update your app. Its ok to change configuration files (e.g. `configmodels.txt`) that were generated after cloning.
+
+**update virtual environment**
+
+
+If the requirements file changed you can safely update by deleting the old directory (`.env_mac/.env_win/env_lin`)
+
+and recreating it using the steps above:
+- create env
+- activate env
+- pip install
+
+
+
+
+
+
+
 # Usage 
 You can use Framepack/F1/Studio as you always have. Just start the app and be creative!
 
@@ -620,6 +651,9 @@ MacOS:
 
 
 ### Random Issues
+
+- **I'll get a warning about plans to deprecate and remove the video decoding and encoding capabilities of torchvision at start**: The warning about deprecating video decoding in torchvision .022 beyond version 0.24 and that users are encouraged to migrate their existing video decoding code to rely on the TorchCodec project is normal. This is part of pytorch warning developers *very early* to update. Dont worry. this is fine.
+
 
 - **"Output is noise in random colors"**: try a lower resolution. Depending on your hardware some higher resolutions might not work at all for you.
 - **"RuntimeError: CUDA error: no kernel image is available for execution on the device":** You didnt use my libraries.. and your libraries were not compiled with the CUDA Toolkit that supports your card. If you have a 50 Series card you need libraries compiled with at least CUDA Toolkit 12.8 
