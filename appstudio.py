@@ -1083,6 +1083,8 @@ def worker(
         
         # Load the transformer model
         current_generator.load_model()
+        if high_vram:
+            current_generator.transformer.to(gpu)
         
         # Ensure the model has no LoRAs loaded
         #print(f"Ensuring {model_type} model has no LoRAs loaded")
