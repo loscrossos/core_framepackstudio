@@ -660,7 +660,18 @@ Linux:
 MacOS:
 - Restart once in safe mode: A well guarded secret. When you restart in safe mode MacOS will clean up your disk! freed like 15GB on my disk out of the blue.
 
+### MacOS
 
+MacOS is a special case since we have unified RAM. You will have to take care of somethings to get this running at all and to not Crash your OS. 16GB RAM is the very minimum i think that can run at all.. some hints if you are running out of memory. There is a spike in memory usage after generation during video encoding for storage.. so even if the first steps work you might have a failure at the end. Specially with longer videos.
+
+- set reserved memory to 10.5. 
+- Close ALL other applications (not only in the background but closing them). 
+- use a lightweight browser for generation with no other tabs open than framepack. 
+- make sure you have enough free disk space (100GB at least). 
+- For generation: 
+    - reduce the video size to the minimum. if that works then you can gradually increase video size.
+    - Start with shorter videos. More length consumes more RAM
+    
 ### Random Issues
 
 - **I'll get a warning about plans to deprecate and remove the video decoding and encoding capabilities of torchvision at start**: The warning about deprecating video decoding in torchvision .022 beyond version 0.24 and that users are encouraged to migrate their existing video decoding code to rely on the TorchCodec project is normal. This is part of pytorch warning developers *very early* to update. Dont worry. this is fine.
